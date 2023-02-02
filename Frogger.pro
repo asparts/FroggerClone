@@ -21,7 +21,8 @@ TEMPLATE = app
 
 SOURCES += \
         frog.cpp \
-        main.cpp
+        main.cpp \
+        map.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -30,9 +31,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Global.h \
-    frog.h
+    frog.h \
+    map.h
 
-DISTFILES += \
+OTHER_FILES += \
     assets/Sprite-0004.ase \
     assets/Sprite-0004.png \
-    assets/frog.png
+    assets/frog.png \
+    frog.png

@@ -2,15 +2,17 @@
 #include <QCoreApplication>
 #include <SFML/Graphics.hpp>
 #include <Global.h>
-
+#include "map.h"
 #include <chrono>
 
 int main()
 {
-QCoreApplication a();
-sf::RenderWindow myWindow(sf::VideoMode(CELL_SIZE * MAP_WIDTH * SCREEN_RESIZE, SCREEN_RESIZE * (FONT_HEIGHT + CELL_SIZE * MAP_HEIGHT)), "Frogger", sf::Style::Close);
+sf::RenderWindow myWindow;
+myWindow.create(sf::VideoMode(CELL_SIZE * MAP_WIDTH * SCREEN_RESIZE, SCREEN_RESIZE * CELL_SIZE * MAP_HEIGHT + CELL_SIZE), "Frogger");
+myWindow.display();
+myWindow.clear();
 sf::Event myEventHandler;
-
+//myWindow.clear(sf::Color(0, 76, 0));
 
 //Time stuff
 std::chrono::microseconds lag(0);
@@ -20,6 +22,8 @@ previous_time = std::chrono::steady_clock::now();
 
 //Mr frog :)
 Frog frog;
+
+Map map;
 
 while(myWindow.isOpen())
 {
@@ -39,9 +43,12 @@ while(myWindow.isOpen())
     previous_time += delta_time;
 
 //    myWindow.clear(sf::Color(255,0,0));
-//    myWindow.display();
+//
 
-    myWindow.clear(sf::Color(0,0,255));
+
+    map.draw_map(myWindow);
     frog.draw(myWindow);
+    frog.update();
+    myWindow.display();
 }
 }
